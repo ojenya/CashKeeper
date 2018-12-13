@@ -1,0 +1,18 @@
+extend layout
+
+block content
+ .main.container
+    .form      
+        p Регистрация
+        form(method='POST' action='/reg')
+          div.form-group
+            label(for='login')   
+            input.form-control(type='text' id='login' placeholder='Введите Ваш логин' name='login')
+          div.form-group
+            label(for='password')  
+            input.form-control(type='password' id='password' placeholder='Введите пароль' name='password')
+          button.btn.btn-primary(type='submit') Некст 
+          //- -if (err =='1')
+          //-   p Вы ввели некорректные данные
+          //-   a(href="/reg") Зарегистрируемся?
+           

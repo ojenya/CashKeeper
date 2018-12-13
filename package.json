@@ -1,0 +1,20 @@
+{
+  "name": "SJ Web",
+  "version": "0.0.1",
+  "private": "true",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^3.0.0-alpha4",
+    "express-session": "^1.15.6",
+    "jade": "^1.11.0",
+    "jquery": "^3.3.1",
+    "json": "^9.0.6",
+    "moment": "^2.22.2",
+    "mysql": "^2.16.0",
+    "nib": "^1.1.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "stylus": "^0.49.3"
+  }
+}

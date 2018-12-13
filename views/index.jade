@@ -1,0 +1,18 @@
+extend layout
+
+block content
+ .main.container
+    .form      
+        p Authorization
+        form(method='POST' action='/index')
+          div.form-group
+            label(for='email')   
+            input.form-control(type='text' id='email' placeholder='email' name='email')
+          div.form-group
+            label(for='password')  
+            input.form-control(type='password' id='password' placeholder='password' name='passwd')
+          button.btn.btn-primary(type='submit') Log in 
+          -if (err =='1')
+            p Вы ввели некорректные данные
+            a(href="/reg") Зарегистрируемся?
+           

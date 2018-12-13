@@ -1,0 +1,105 @@
+extend layout
+block includes
+  script(type='text/javascript' src='https://www.gstatic.com/charts/loader.js')
+  script(type='text/javascript' src='/jquery-3.3.1.min.js')
+  script(type='text/javascript' src='/add.js')
+  //https://code.jquery.com/jquery-3.3.1.js
+body
+.main-conteiner
+ block content
+  p
+    b Привет, #{user}!
+  table
+    p Вы выбрали месяц  #{month}
+    tr
+      th Категория Расходов
+      th Сумма
+      th Примечание
+      th Дата
+      
+        each page in pages
+          tr
+            td 
+              a= page.category
+            td
+              a= page.sum
+            td 
+              a= page.text
+            td 
+              a= page.date
+            //-#{ moment(1000 * page.date).format('YYYY/MM/DD, HH:MM') }
+               
+      //- th Дата      
+      //-   each da in d
+      //-     tr
+      //-       td
+      //-         a= da.date
+  //input(type='button' value='Редактировать')              
+  .jenya
+    // Load the AJAX API
+    script(type='text/javascript').
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+      //google.charts.setOnLoadCallback(drawChart(#{f},));
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+      //function drawChart(a, b, c, d) {
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+      ['Food', #{f}],
+      ['Transport', #{t}],
+      ['Entertainment', #{e}],
+      ['Buy', #{b}]
+      ]);
+      // Set chart options
+      var options = {'title':'Расходы за текущий месяц','width':400 ,'height':300 ,'backgroundColor':'#faf9f0',
+            
+      /*legend: 'none', //пишутся не % а название категории
+      pieSliceText: 'label',*/
+      /*slices: { //меняем цвет части диаграммы
+              0: { color: 'yellow' },
+              1: { color: 'red' }
+            }*/
+      };
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+      }
+  // Div that will hold the pie chart
+  #chart_div
+ 
+  //- head
+    meta(charset='utf-8')
+    link(rel='jquery', href='jquery-3.3.1.min.js')
+  form(name='form' method='post' action='javascript:submitNewCost()')
+    p
+      b Что?
+      br
+      select(id='category' name='category') 
+        //optgroup(label='Выбери категорию')
+        - k = 0
+        each pag in categories
+          option(value='r'+k) #{pag.name}
+          - k=k+1 
+    P
+      b Сколько?
+    input(placeholder="себя не обманешь" name="howmuch" id='sum' value="")      
+    P
+      b Когда?
+      br
+      input(type='date' id='date' name='calendar')
+    p
+      b Конкретнее?
+      br
+      textarea(name='comment' id='comment' cols='40' rows='3')
+    p
+      input(type='submit' value='Отправить')
+      input(type='reset' value='Очистить')
+
